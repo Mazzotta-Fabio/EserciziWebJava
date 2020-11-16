@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ristorante Pinco Pallo</title>
+<style text="text/css">	
+	input{
+	   padding:4px;
+	}
+</style>
+</head>
+<body>
+	<h1>Benvenutoo sulla pagina del Ristorante Pinco Pallo</h1>
+	<h2>Seleziona il tuo menu</h2>
+	<form action="ServletRistorante" method="POST">
+	<input type="checkbox" name="margherita" value="3.50">MARGHERITA euro 3.50 <br>
+	<input type="checkbox" name="capricciosa" value="4.50"> CAPRICCCIOSA euro 4.50 <br>
+	<input type="checkbox" name="quattroStagioni" value="5.00"> QUATTRO STAGIONI euro 5.00 <br>
+	<input type="checkbox" name="pugliese" value="5.50"> PUGLIESE euro 5.50 <br>
+	<input type="checkbox" name="americana" value="9.50"> AMERICANA euro 9.50 <br>
+	<input type="submit" value="Invia Ordinazione">
+	</form>
+</body>
+</html>
