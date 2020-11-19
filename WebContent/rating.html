@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Rating</title>
+<style type="text/css">
+
+  tr > td{
+     background-color:red;
+  }
+  table,th,td{
+     border-style:solid;
+     border-width:1px;
+  }
+  td[class=pt]{
+    text-align:center;
+    padding:10px;
+    border-radius:10px;
+  }
+</style>
+<script type="text/javascript">
+function premi(){
+	var albergo=document.getElementById("albergo").value;
+	statistica(albergo);
+}
+function statistica(codAlb){
+	var httpRequest=new XMLHttpRequest();
+	httpRequest.onreadystatechange=function(){
+		if(httpRequest.readyState==4 && httpRequest.status==200){
+			var xmlDoc=httpRequest.responseXML;
+			var nomi=document.getElementsByClassName("val");
+			var valori=document.getElementsByClassName("pt");
+			var response=xmlDoc.getElementsByTagName("response");
+			var intest=document.getElementById("intestazione");
+			intest.firstChild.nodeValue=xmlDoc.getElementsByTagName("Albergo")[0].firstChild.data;
+			if(xmlDoc.getElementsByTagName("response")[0].firstChild.data=="Codice Albergo Invalido"){
+				alert("ERROR QUERY: "+xmlDoc.getElementsByTagName("response")[0].firstChild.data);
+			}
+			else{
+				for(var i=0;i<valori.length;i++){
+					var numero=parseInt(xmlDoc.getElementsByTagName(nomi[i].firstChild.data)[0].firstChild.data);
+					cambiaColore(valori[i],numero);
+					valori[i].firstChild.nodeValue=numero;
+				}
+			}
+			
+		}
+		document.getElementById("paragrafo").firstChild.nodeValue="NM";
+	};
+	httpRequest.open("GET","ServletAlbergo?nomealbergo="+codAlb,true);
+	httpRequest.send(null);
+}
+
+function cambiaColore(cella,numero){
+	if(numero<=6){
+		cella.style.background="green";
+	}
+	else{
+		cella.style.background="red";
+	}
+}
+</script>
+</head>
+<body id="corpo">
+	<form>
+    <label> Inserisci un nome un albergo </label>
+    <input type="text" id="albergo">
+    <input type="submit" onclick="premi()" value="Invia"> 
+	</form>
+	<table>
+		<thead>
+		<tr><th colspan="4" id="intestazione">Hotel Lucinesi</th></tr>
+		</thead>
+		<tbody>
+		<tr><td class="val">Camere</td> <td class="pt">1</td>
+		<td class="val">Posizione</td> <td class="pt">1</td>
+		</tr>
+		<tr><td class="val">Servizi</td> <td class="pt">1</td>
+		<td class="val">Pulizia</td> <td class="pt">1</td>
+		</tr>
+		</tr>
+		</tbody>
+		</table>
+		<p id="paragrafo"> CIAO </p>
+</body>
+</html>
