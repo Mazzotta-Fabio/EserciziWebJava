@@ -31,12 +31,12 @@ function statistica(codAlb){
 			var nomi=document.getElementsByClassName("val");
 			var valori=document.getElementsByClassName("pt");
 			var response=xmlDoc.getElementsByTagName("response");
-			var intest=document.getElementById("intestazione");
-			intest.firstChild.nodeValue=xmlDoc.getElementsByTagName("Albergo")[0].firstChild.data;
 			if(xmlDoc.getElementsByTagName("response")[0].firstChild.data=="Codice Albergo Invalido"){
 				alert("ERROR QUERY: "+xmlDoc.getElementsByTagName("response")[0].firstChild.data);
 			}
 			else{
+				var intest=document.getElementById("intestazione");
+				intest.firstChild.nodeValue=xmlDoc.getElementsByTagName("Albergo")[0].firstChild.data;
 				for(var i=0;i<valori.length;i++){
 					var numero=parseInt(xmlDoc.getElementsByTagName(nomi[i].firstChild.data)[0].firstChild.data);
 					cambiaColore(valori[i],numero);
@@ -45,7 +45,6 @@ function statistica(codAlb){
 			}
 			
 		}
-		document.getElementById("paragrafo").firstChild.nodeValue="NM";
 	};
 	httpRequest.open("GET","ServletAlbergo?nomealbergo="+codAlb,true);
 	httpRequest.send(null);
@@ -81,6 +80,5 @@ function cambiaColore(cella,numero){
 		</tr>
 		</tbody>
 		</table>
-		<p id="paragrafo"> CIAO </p>
 </body>
 </html>
