@@ -31,6 +31,20 @@ public class GestioneInformazioniUtente {
 		statement.execute("UPDATE `informazioniutente` SET `Password`='1544' WHERE `Password`= '154'");
 	}
 	
+	public Autenticazione getAutenticazione(String user,String password) throws SQLException {
+		PreparedStatement ps=connection.prepareStatement("select * from autenticazione where user=? and password=?");
+		ps.setString(1, user);
+		ps.setString(2, password);
+		ResultSet rs=ps.executeQuery();
+		Autenticazione aut=null;
+		while(rs.next()) {
+			aut=new Autenticazione();
+			aut.setUser(rs.getString("USER"));
+			aut.setPassword(rs.getString("PASSWORD"));
+		}
+		return aut;
+		
+	}
 	public void chiudiConnessione() throws SQLException {
 		DriverManagerConnectionPool.releaseConnection(connection);
 	}

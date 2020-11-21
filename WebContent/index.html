@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Index</title>
+<style type="text/css">
+   #pt{ 
+      margin-top:10px;
+      height:40px;
+      width:170px;
+      color:magenta;
+      background-color:green;
+      font-weight:bold;
+      font-family:arial;
+      border-style:solid;
+      border-color:black;
+      border-width:1px;
+      border-radius:10px;
+   }
+   div{
+       float:left;
+       margin-left:10px;
+   }
+   .autenticazione{
+      height:100px;
+      width:400px;
+      border-width:2px;
+      border-color:magenta;
+      border-style:solid;
+      background-color:green;
+      visibility:hidden;
+   }
+   label{
+      font-family:arial;
+      font-size:20px;
+      color:magenta;
+      font-weight:bold;
+      
+   }
+</style>
+<script type="text/javascript">
+   function cambiaStile(pulsante){
+		pulsante.style.background="magenta";
+	    pulsante.style.color="green";
+   }
+   function resettaStile(pulsante){
+	   pulsante.style.background="green";
+	   pulsante.style.color="magenta";
+   }
+   function attiva(id){
+	   var elem=document.getElementById(id);
+	   if(id=='login'){
+		   document.getElementById("invioPassword").style.visibility="hidden";
+	   }
+	   else{
+		   document.getElementById("login").style.visibility="hidden";
+	   }
+	   elem.style.visibility="visible";
+   }
+</script>
+</head>
+<body>
+    <div>
+       <input type="button" value="Autenticazione" id="pt" onclick="attiva('login')" onmouseover="cambiaStile(this)" onmouseout="resettaStile(this)"> <br>
+       <input type="button" value="Invia Password" id="pt" onclick="attiva('invioPassword')" onmouseover="cambiaStile(this)" onmouseout="resettaStile(this)">
+    </div>
+    
+    <div class="autenticazione" id="login">
+      <form action="Autenticazione" method="POST"> 
+      	 <label>Login:</label>
+      	 <input type="text" id="username" name="user"> <br>
+      	 <label> Password: </label>
+      	 <input type="password" id="password" name="password"> <br>
+      	 <input type="submit" value="Autentica">
+     	 <input type="reset" value="Resetta">
+      </form>
+    </div> 
+    <div class="autenticazione" id="invioPassword">
+      <form action="" method="POST"> 
+      	 <label>Email:</label>
+      	 <input type="text" id="email"> <br>
+      	 <input type="submit" value="Invia Password">
+     	 <input type="reset" value="Resetta">
+      </form>
+    </div>
+</body>
+</html>
