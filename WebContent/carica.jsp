@@ -36,12 +36,6 @@
     }
 </style>
 <script type="text/javascript">
-    function onView(){
-    	document.getElementById("modello").innerHTML="";
-    	document.getElementById("27.5").innerHTML="";
-    	document.getElementById("29").innerHTML="";
-    	document.getElementById("tabModello").style.visibility="visible";
-    }
     function viewModel(smodello,s27,s29){
     	var modello=document.getElementById("modello");
     	var c27=document.getElementById("27.5");
@@ -50,6 +44,10 @@
     	c27.innerHTML=s27;
     	c29.innerHTML=s29;
     	document.getElementById("tabModello").style.visibility="visible";
+    	window.setTimeout("hiddenDiv()",5000);
+    }
+    function hiddenDiv(){
+    	document.getElementById("tabModello").style.visibility="hidden";
     }
 </script>
 </head>
@@ -61,8 +59,8 @@
          for(Modello m:listaModelli){%>
          	<tr class="princ"> 
          		<td onclick="viewModel('<%=m.getMarca() %>','<%=m.getS275() %>','<%=m.getS29() %>')" id="nomeProdotto" name="<%=m.getMarca() %>" value="<%=m.getMarca() %>" > <%=m.getMarca() %> </td> 
-         		<td id="valore1" onclick="onView()"> <%=m.getS275() %> </td> 
-         		<td id="valore2" onclick="onView()"> <%=m.getS29() %> </td> 
+         		<td id="valore1" onclick="viewModel('','','')"> <%=m.getS275() %> </td> 
+         		<td id="valore2" onclick="viewModel('','','')"> <%=m.getS29() %> </td> 
          	</tr>
          <%} %>	
      </table>
