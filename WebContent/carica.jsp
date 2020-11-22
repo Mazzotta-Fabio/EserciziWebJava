@@ -7,7 +7,10 @@
 <meta charset="ISO-8859-1">
 <title>Script Bici</title>
 <style type="text/css">
-
+   div{
+      float:left;
+      margin-left:10px;
+   }
    table{
        border-style:double;
     }
@@ -15,24 +18,38 @@
        border-style:solid;
        border-width:1px;
     }
-    tr:nth-child(odd){
-        background-color:green;
-    }
-    tr:nth-child(even){
-        background-color:pink;
-    }
     th{
        background-color:white;
     }
-    
-    tr:hover{
+    .princ:nth-child(odd){
+        background-color:green;
+    }
+    .princ:nth-child(even){
+        background-color:pink;
+    }
+    .princ:hover{
        cursor:pointer;
        background-color:blue;
+    }
+    .int{
+       border-style:none;
     }
 </style>
 <script type="text/javascript">
     function onView(){
-	  alert("Ho premuto una cella");
+    	document.getElementById("modello").innerHTML="";
+    	document.getElementById("27.5").innerHTML="";
+    	document.getElementById("29").innerHTML="";
+    	document.getElementById("tabModello").style.visibility="visible";
+    }
+    function viewModel(smodello,s27,s29){
+    	var modello=document.getElementById("modello");
+    	var c27=document.getElementById("27.5");
+    	var c29=document.getElementById("29");
+    	modello.innerHTML=smodello;
+    	c27.innerHTML=s27;
+    	c29.innerHTML=s29;
+    	document.getElementById("tabModello").style.visibility="visible";
     }
 </script>
 </head>
@@ -42,13 +59,21 @@
       <th> Modello </th> <th> 27.5 </th> <th> 29 </th>
       <% List<Modello> listaModelli=(List<Modello>)request.getAttribute("listaModelli");
          for(Modello m:listaModelli){%>
-         	<tr> 
-         		<td onclick="onView()" id="nomeProdotto" name="<%=m.getMarca() %>" value="<%=m.getMarca() %>" > <%=m.getMarca() %> </td> 
-         		<td id="valore1" onclick="onView()" name="<%=m.getS275() %>" value="<%=m.getS275() %>"> <%=m.getS275() %> </td> 
-         		<td id="valore2" onclick="onView()" name="<%=m.getS29() %>" value="<%=m.getS29() %>"> <%=m.getS29() %> </td> </tr>
-         
+         	<tr class="princ"> 
+         		<td onclick="viewModel('<%=m.getMarca() %>','<%=m.getS275() %>','<%=m.getS29() %>')" id="nomeProdotto" name="<%=m.getMarca() %>" value="<%=m.getMarca() %>" > <%=m.getMarca() %> </td> 
+         		<td id="valore1" onclick="onView()"> <%=m.getS275() %> </td> 
+         		<td id="valore2" onclick="onView()"> <%=m.getS29() %> </td> 
+         	</tr>
          <%} %>	
      </table>
    </div>  
+   <div style="visibility:hidden" id="tabModello">
+   <table class="int" >
+      <tr> <th class="int"> Bici Selezionata </th>
+      <tr> <td class="int"> Modello </td> <td id="modello">  </td>
+      <tr> <td class="int"> Misura 27.5 </td> <td id="27.5">  </td>
+      <tr> <td class="int"> Misura 29 </td> <td id="29">  </td>
+   </table>
+   </div>
 </body>
 </html>
