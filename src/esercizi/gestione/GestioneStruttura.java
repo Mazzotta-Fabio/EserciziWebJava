@@ -1,9 +1,11 @@
-package esercizi.bean;
+package esercizi.gestione;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import esercizi.bean.Struttura;
 
 public class GestioneStruttura {
 	private Connection connection;

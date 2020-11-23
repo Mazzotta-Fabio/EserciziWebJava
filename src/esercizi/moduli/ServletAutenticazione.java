@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import esercizi.bean.Autenticazione;
-import esercizi.bean.GestioneInformazioniUtente;
+import esercizi.gestione.GestioneInformazioniUtente;
 
 /**
  * Servlet implementation class ServletModuli

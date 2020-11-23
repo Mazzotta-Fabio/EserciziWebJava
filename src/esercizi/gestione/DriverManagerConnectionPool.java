@@ -1,4 +1,4 @@
-package esercizi.bean;
+package esercizi.gestione;
 
 import java.sql.*;
 import java.util.*;

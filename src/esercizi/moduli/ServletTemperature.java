@@ -1,4 +1,4 @@
-package esercizi.tabella;
+package esercizi.moduli;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,20 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import esercizi.bean.Modello;
-import esercizi.gestione.GestioneModello;
+import esercizi.bean.Temperatura;
+import esercizi.gestione.GestioneTemperature;
 
 /**
- * Servlet implementation class ServletBici
+ * Servlet implementation class ServletTemperature
  */
-@WebServlet("/ServletBici")
-public class ServletBici extends HttpServlet {
+@WebServlet("/ServletTemperature")
+public class ServletTemperature extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletBici() {
+    public ServletTemperature() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +34,17 @@ public class ServletBici extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String value=request.getParameter("c");
 		Cookie [] cookies=request.getCookies();
 		if(cookies!=null) {
 			for(int i=0;i<cookies.length;i++) {
-				Cookie cookie=cookies[i];
-				String name=cookie.getName();
-				String value=cookie.getValue();
-				if((name.equals("nome"))&&(value.equals("pippo"))) {
+				if(cookies[i].getValue().equals("abilitazione")) {
 					try {
-						GestioneModello gm=new GestioneModello();
-						List<Modello> listaModelli=gm.getModelli();
-						gm.chiudiConnessione();
-						request.setAttribute("listaModelli", listaModelli);
-						RequestDispatcher rd=getServletContext().getRequestDispatcher("/carica.jsp");
+						GestioneTemperature gt=new GestioneTemperature();
+						List<Temperatura> list=gt.getAllTemperature(value);
+						gt.chiudiConnessione();
+						request.setAttribute("temperature", list);
+						RequestDispatcher rd=getServletContext().getRequestDispatcher("/settimana.jsp");
 						rd.forward(request, response);
 					}
 					catch(SQLException e) {
@@ -56,10 +54,11 @@ public class ServletBici extends HttpServlet {
 			}
 		}
 		else {
-			Cookie newCookie=new Cookie("nome","pippo");
-			newCookie.setMaxAge(365*36654);
-			response.addCookie(newCookie);
+			Cookie c=new Cookie("temperatura","abilitazione");
+			c.setMaxAge(234*789);
+			response.addCookie(c);
 		}
+		
 	}
 
 	/**

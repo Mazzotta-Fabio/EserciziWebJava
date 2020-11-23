@@ -1,6 +1,9 @@
-package esercizi.bean;
+package esercizi.gestione;
 
 import java.sql.*;
+
+import esercizi.bean.Autenticazione;
+import esercizi.bean.InformazioniUtente;
 /*Model gestione dati*/
 public class GestioneInformazioniUtente {
 	

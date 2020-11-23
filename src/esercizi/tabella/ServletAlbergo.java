@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import esercizi.bean.GestioneStruttura;
 import esercizi.bean.Struttura;
+import esercizi.gestione.GestioneStruttura;
 
 /**
  * Servlet implementation class ServletAlbergo
